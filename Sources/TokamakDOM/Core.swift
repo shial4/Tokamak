@@ -176,6 +176,12 @@ public typealias Toggle = TokamakCore.Toggle
 public typealias VStack = TokamakCore.VStack
 public typealias ZStack = TokamakCore.ZStack
 
+// MARK: Gestures
+
+public typealias TapGesture = TokamakCore.TapGesture
+public typealias DragGesture = TokamakCore.DragGesture
+public typealias LongPressGesture = TokamakCore.LongPressGesture
+
 // MARK: Special Views
 
 public typealias View = TokamakCore.View
