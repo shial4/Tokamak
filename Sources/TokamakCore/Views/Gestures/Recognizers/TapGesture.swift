@@ -54,7 +54,7 @@ public struct TapGesture: Gesture {
 
 extension View {
     /// Adds an action to perform when this view recognizes a tap gesture.
-    public func onTapGesture(count: Int, perform action: @escaping () -> Void) -> some View {
+    public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View {
         self.gesture(
             TapGesture(count: count)
                 .onEnded { _ in
