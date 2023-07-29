@@ -25,10 +25,17 @@ public struct _GestureView<Content: View, G: Gesture>: View {
     }
     
     public var body: some View {
-        if let renderer = (gesture as? GestureRenderer) {
-            renderer.makeGestureBody(gesture: $gesture, content: AnyView(content))
+        if let renderer = gesture as? GestureRenderer {
+            renderer
+                .makeGestureBody(gesture: $gesture, content: AnyView(content))
+                .onAppear {
+                    print("🟡 _GestureView.makeGestureBody")
+                }
         } else {
             content
+                .onAppear {
+                    print("🟡 _GestureView.content")
+                }
         }
     }
 }
