@@ -21,7 +21,7 @@ import TokamakStaticHTML
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
-        print("🔵 GestureView", G.Body.self)
+        print("🔵 GestureView", G.Body.self, G.Body.self == TapGesture.self)
         return AnyView(content)
     }
 }

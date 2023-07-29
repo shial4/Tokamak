@@ -17,7 +17,7 @@
 
 public protocol Gesture {
     associatedtype Value
-    associatedtype Body: Gesture
+    associatedtype Body: Gesture where Body.Value == Value
 
     var state: Value { get set }
     var phase: GesturePhase { get }
