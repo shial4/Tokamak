@@ -26,8 +26,8 @@ public protocol Gesture {
 
 extension Gesture {
     public static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView {
-        Self._makeGesture(gesture: gesture, content: content)
-//        fatalError("implementation of \(#function) required by \(Self.self)")
+//        Self._makeGesture(gesture: gesture, content: content)
+        fatalError("implementation of \(#function) required by \(Self.self)")
     }
 }
 
