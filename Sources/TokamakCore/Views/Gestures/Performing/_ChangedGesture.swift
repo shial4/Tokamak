@@ -16,7 +16,7 @@
 //
 
 public struct _ChangedGesture<G>: Gesture where G: Gesture {
-    public var gesture: AnyGesture<G>
+    public var gesture: G
     public let action: (G.Value) -> Void
     public var phase: GesturePhase {
         get {
@@ -37,11 +37,11 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
     }
     
     init(gesture: G, action: @escaping (Value) -> Void) {
-        self.gesture = AnyGesture(gesture)
+        self.gesture = gesture
         self.action = action
     }
     
     public func _makeGesture(content: AnyView) -> AnyView {
-        gesture.makeGestureFn(content)
+        gesture._makeGesture(content: content)
     }
 }

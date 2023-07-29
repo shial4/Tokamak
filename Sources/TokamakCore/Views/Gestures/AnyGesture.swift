@@ -16,14 +16,10 @@
 //
 
 public struct AnyGesture<G: Gesture>: Gesture {
-    public let makeGestureFn: (AnyView) -> AnyView
     public var state: G.Value
     public var phase: GesturePhase
 
     public init(_ gesture: G) where G.Value == Value {
-        makeGestureFn = { content in
-            return gesture._makeGesture(content: content)
-        }
         state = gesture.state
         phase = gesture.phase
     }
