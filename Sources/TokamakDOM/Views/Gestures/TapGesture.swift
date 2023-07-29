@@ -26,7 +26,7 @@ extension TapGesture {
         return AnyView(
             DynamicHTML("div", [:], listeners: [
                 "onclick": { event in
-                    print("🟢 onclick", state)
+                    print("🟢 onclick")
 //                    state = state + 1
                 }
             ]) {
