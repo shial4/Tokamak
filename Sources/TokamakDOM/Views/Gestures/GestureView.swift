@@ -20,7 +20,7 @@ import TokamakCore
 import TokamakStaticHTML
 import Foundation
 
-extension GestureView: DOMPrimitive {
+extension TokamakCore.GestureView: DOMPrimitive {
     var renderedBody: AnyView {
         switch G.Body.self {
         case is TapGesture.Type:
@@ -28,7 +28,7 @@ extension GestureView: DOMPrimitive {
         case is LongPressGesture.Type:
             return longPressGestureBody
         default:
-            return AnyView(content.overlay(Text("🛑")))
+            return AnyView(content.overlay(Text("🛑 \(G.Body.self)")))
         }
     }
     

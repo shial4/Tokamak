@@ -179,8 +179,6 @@ public typealias ZStack = TokamakCore.ZStack
 // MARK: Gestures
 
 public typealias GestureState = TokamakCore.GestureState
-public typealias GestureView = TokamakCore.GestureView
-
 public typealias TapGesture = TokamakCore.TapGesture
 public typealias DragGesture = TokamakCore.DragGesture
 public typealias LongPressGesture = TokamakCore.LongPressGesture
