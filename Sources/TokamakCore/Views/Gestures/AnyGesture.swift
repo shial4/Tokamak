@@ -36,7 +36,7 @@ public struct AnyGesture<G: Gesture>: Gesture {
         self.gesture = gesture
     }
 
-    public func _makeGesture(content: AnyView) -> AnyView {
-        gesture._makeGesture(content: content)
+    public static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView {
+        G._makeGesture(gesture: gesture.gesture, content: content)
     }
 }

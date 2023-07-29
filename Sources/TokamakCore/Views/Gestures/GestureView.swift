@@ -25,7 +25,7 @@ public struct _GestureView<Content: View, G: Gesture>: View {
     }
     
     public var body: some View {
-        gesture._makeGesture(gesture: $gesture, content: AnyView(content))
+        G._makeGesture(gesture: $gesture, content: AnyView(content))
     }
 }
 
