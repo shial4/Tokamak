@@ -20,43 +20,38 @@ import Foundation
 public struct TapGesture: Gesture {
     public typealias Body = Self
     
-    private var _state: Int = 0
-    public var state: Int {
-        get {
-            return _state
-        }
-        set {
-            print("🟢 TapGesture set state", newValue, _state, phase)
-            guard newValue > 0 else { return }
-            let touch = Date()
-            let delayInSeconds = touch.timeIntervalSince(touchTime)
-            phase = .changed
-            touchTime = touch
+    /// The required number of taps to complete the tap gesture.
+    private var count: Int
+    /// The maximum duration between the taps
+    private var delay: Double = 0.3
+    private var touchTime = Date()
+    
+    public var state: Int = 0
+    public var phase: GesturePhase = .none {
+        didSet {
+            print("🚀 phase", phase, oldValue)
             
-            print("🟢 TapGesture delayInSeconds", delayInSeconds)
-            _state = newValue
-            if delayInSeconds > delay {
-                _state = 0
-            } else if newValue == count {
-                phase = .ended
+            if case .began = phase {
+                touchTime = Date()
+            } else if case .ended = phase, case .began = oldValue {
+                let touch = Date()
+                let delayInSeconds = touch.timeIntervalSince(touchTime)
+                
+                if delayInSeconds > delay {
+                    state = 0
+                } else {
+                    state += 1
+                }
+            } else {
+                state = 0
             }
         }
     }
-    public var phase: GesturePhase = .none {
-        didSet {
-            print("🚀 phase", phase)
-        }
-    }
-    private var count: Int
-    private var delay: Double
-    private var touchTime = Date()
     
     /// Creates a tap gesture with the number of required taps.
     /// - Parameter count: The required number of taps to complete the tap gesture.
-    /// - Parameter delay: The maximum duration between the taps
-    public init(count: Int = 1, delay: Double = 0.3) {
+    public init(count: Int = 1) {
         self.count = count
-        self.delay = delay
     }
 }
 

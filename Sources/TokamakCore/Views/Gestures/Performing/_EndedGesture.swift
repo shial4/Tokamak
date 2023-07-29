@@ -34,6 +34,7 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
             gesture.state
         }
         set {
+            print("📚 _EndedGesture", newValue)
             gesture.state = newValue
             if case .ended = phase {
                 action(newValue)
