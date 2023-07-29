@@ -21,7 +21,7 @@ import TokamakStaticHTML
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
-        print("🔵 TapGesture._makeGesture")
+        print("🔵 TapGesture._makeGesture", gesture.self, gesture.state)
         return AnyView(
             DynamicHTML("div", [:], listeners: [
                 "onclick": { event in
@@ -29,7 +29,6 @@ extension GestureView: DOMPrimitive {
                 }
             ]) {
                 content
-                    .overlay(Text("X"))
             }
         )
     }
