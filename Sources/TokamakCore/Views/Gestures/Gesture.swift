@@ -16,7 +16,7 @@
 //
 
 public protocol GestureRenderer {
-    func makeGestureBody(gesture: Binding<Self>, content: AnyView) -> AnyView
+    func makeGestureBody<Value>(gesture: Binding<Value>, content: AnyView) -> AnyView where Value: Gesture
 }
 
 public protocol Gesture {
