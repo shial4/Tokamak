@@ -42,7 +42,11 @@ public struct TapGesture: Gesture {
             }
         }
     }
-    public var phase: GesturePhase = .began
+    public var phase: GesturePhase = .none {
+        didSet {
+            print("🚀 phase", phase)
+        }
+    }
     private var count: Int
     private var delay: Double
     private var touchTime = Date()

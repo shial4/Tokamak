@@ -24,6 +24,9 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
         get {
             gesture.phase
         }
+        set {
+            gesture.phase = newValue
+        }
     }
     
     public var state: G.Value {

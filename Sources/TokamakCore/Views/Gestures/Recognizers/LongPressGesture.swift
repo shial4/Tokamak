@@ -19,7 +19,7 @@ public struct LongPressGesture: Gesture {
     public typealias Body = Self
     
     public var state: Bool = false
-    public var phase: GesturePhase = .began
+    public var phase: GesturePhase = .none
     private var minimumDuration: Double
     private var maximumDistance: Double = 0
     

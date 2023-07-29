@@ -23,6 +23,9 @@ public struct AnyGesture<G: Gesture>: Gesture {
         get {
             gesture.phase
         }
+        set {
+            gesture.phase = newValue
+        }
     }
     
     public var state: G.Value {

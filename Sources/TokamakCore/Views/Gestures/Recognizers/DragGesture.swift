@@ -38,7 +38,7 @@ public struct DragGesture: Gesture {
     }
     
     public var state: Value = Value()
-    public var phase: GesturePhase = .began
+    public var phase: GesturePhase = .none
     
     public var minimumDistance: CGFloat
     /// Creates a dragging gesture with the minimum dragging distance before the gesture succeeds and the coordinate space of the gesture’s location.

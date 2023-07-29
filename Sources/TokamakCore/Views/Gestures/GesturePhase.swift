@@ -18,6 +18,7 @@
 import Foundation
 
 public enum GesturePhase {
+    case none
     case began
     case changed
     case ended

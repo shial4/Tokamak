@@ -20,7 +20,7 @@ public protocol Gesture {
     associatedtype Body: Gesture where Body.Value == Value
 
     var state: Value { get set }
-    var phase: GesturePhase { get }
+    var phase: GesturePhase { get set }
 }
 
 // MARK: Performing the gesture

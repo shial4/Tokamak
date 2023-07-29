@@ -21,7 +21,6 @@ import TokamakStaticHTML
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
-        print("🔵 GestureView", G.Body.self)
         switch G.Body.self {
         case is TapGesture.Type:
             return tapGestureBody
@@ -31,12 +30,11 @@ extension GestureView: DOMPrimitive {
     }
     
     var tapGestureBody: AnyView {
-        print("🟢 GestureView", G.Body.self)
         return AnyView(
             DynamicHTML("div", [:], listeners: [
-                "pointerdown": { _ in print("🟢 pointerdown", G.Body.self) },
-                "pointerup": { _ in print("🟢 pointerup", G.Body.self) },
-                "pointercancel": { _ in print("🟢 pointercancel", G.Body.self) },
+                "pointerdown": { _ in gesture.phase = .began },
+                "pointerup": { _ in gesture.phase = .ended },
+                "pointercancel": { _ in gesture.phase = .cancelled },
             ]) {
                 content
             }
