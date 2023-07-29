@@ -23,7 +23,7 @@ extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
         print("🔵 TapGesture._makeGesture", gesture.self, G.Body.self)
         return AnyView(
-            DynamicHTML("div", [:], listeners: [
+            DynamicHTML("button", [:], listeners: [
                 "onclick": { event in
                     print("🟢 onclick", gesture.self, gesture.state)
                 }
