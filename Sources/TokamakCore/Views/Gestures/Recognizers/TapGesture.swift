@@ -44,6 +44,8 @@ public struct TapGesture: Gesture {
                 let touch = Date()
                 let delayInSeconds = touch.timeIntervalSince(touchTime)
                 
+                print("⏰ delay: ", delayInSeconds)
+                
                 if delayInSeconds > delay {
                     state.value = 0
                 } else {

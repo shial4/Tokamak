@@ -26,6 +26,9 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
         }
         set {
             gesture.state = newValue
+            if gesture.didRecognise {
+                action(gesture.state.value)
+            }
         }
     }
     
