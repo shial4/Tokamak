@@ -25,10 +25,11 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
             gesture.state
         }
         set {
+            let oldValue = gesture.value
             gesture.state = newValue
             
             // If gesture changed, trigger change action
-            if case .changed = gesture.phase {
+            if gesture.value != oldValue {
                 action(gesture.value)
             }
         }
