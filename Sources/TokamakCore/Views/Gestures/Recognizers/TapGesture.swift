@@ -38,7 +38,7 @@ public struct TapGesture: Gesture {
                 let delayInSeconds = touch.timeIntervalSince(touchEndTime)
                 touchEndTime = touch
             
-                if count > 1, delayInSeconds > delay {
+                if state.value > 1, delayInSeconds > delay {
                     state.value = 0
                 } else {
                     state.value += 1
