@@ -26,6 +26,11 @@ public protocol Gesture {
 
 extension Gesture {
     public func _makeGesture(content: AnyView) -> AnyView {
+        return defaultMakeGesture(content: content)
+    }
+    
+    // Default implementation (use this instead of _makeGesture directly)
+    private func defaultMakeGesture(content: AnyView) -> AnyView {
         fatalError("implementation of \(#function) required by \(Self.self)")
     }
 }

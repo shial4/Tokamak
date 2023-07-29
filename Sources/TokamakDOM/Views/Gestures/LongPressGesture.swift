@@ -21,10 +21,6 @@ import TokamakStaticHTML
 import Foundation
 
 extension LongPressGesture {
-    public mutating func _makeGesture(content: AnyView) -> AnyView {
-        content
-    }
-    
     /*
     func attach(gesture: TapGesture) -> some View {
         DynamicHTML("div", listeners: [
