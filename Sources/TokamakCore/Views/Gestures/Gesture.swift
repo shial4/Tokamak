@@ -23,11 +23,6 @@ public protocol Gesture {
 }
 
 extension Gesture {
-    var didRecognise: Bool {
-        print("🚀 default didRecognise")
-        return false
-    }
-    
     public var phase: GesturePhase {
         get {
             state.phase

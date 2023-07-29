@@ -26,7 +26,7 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
         }
         set {
             gesture.state = newValue
-            if gesture.didRecognise {
+            if case .completed = gesture.phase {
                 action(gesture.state.value)
             }
         }

@@ -23,4 +23,5 @@ public enum GesturePhase {
     case changed
     case ended
     case cancelled
+    case completed
 }

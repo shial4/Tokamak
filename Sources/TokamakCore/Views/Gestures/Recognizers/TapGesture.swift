@@ -26,14 +26,6 @@ public struct TapGesture: Gesture {
     private var delay: Double = 0.3
     private var touchTime = Date()
     
-    var didRecognise: Bool {
-        print("🚀 TapGesture didRecognise")
-        guard case .ended = state.phase, count == state.value else {
-            return false
-        }
-        return true
-    }
-    
     public var state: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {
             print("🚀 phase", state.phase, oldValue)
@@ -53,6 +45,10 @@ public struct TapGesture: Gesture {
                 }
             } else {
                 state.value = 0
+            }
+            
+            if case .ended = state.phase, count == state.value {
+                state.phase = .completed
             }
         }
     }
