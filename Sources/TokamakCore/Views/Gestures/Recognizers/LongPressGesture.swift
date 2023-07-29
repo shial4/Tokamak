@@ -19,7 +19,7 @@ import Foundation
 
 public struct LongPressGesture: Gesture {
     public typealias Ended = Bool
-    public typealias Updating = Bool
+    public typealias State = Bool
     public typealias Body = Self
     
     private var minimumDuration: Double
@@ -87,7 +87,7 @@ public struct LongPressGesture: Gesture {
 extension LongPressGesture {
     /// Adds an action to perform when the gesture’s value changes.
     /// Available when Value conforms to Equatable.
-    public func onChanged(_ action: @escaping (Updating) -> Void) -> _ChangedGesture<Self> {
+    public func onChanged(_ action: @escaping (State) -> Void) -> _ChangedGesture<Self> {
         _ChangedGesture(gesture: self, action: action)
     }
 }
@@ -147,7 +147,7 @@ struct LongPressGestureModifier: ViewModifier {
         content.gesture(
             LongPressGesture(minimumDuration: minimumDuration, maximumDistance: maximumDistance)
                 .updating($isPressing) { currentState, gestureState, _ in
-                    gestureState = currentState
+//                    gestureState = currentState
                     onPressingChanged?(currentState)
                 }
                 .onEnded { _ in

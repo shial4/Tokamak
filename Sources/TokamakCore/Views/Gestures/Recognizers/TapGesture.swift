@@ -19,7 +19,7 @@ import Foundation
 
 public struct TapGesture: Gesture {
     public typealias Ended = Void
-    public typealias Updating = Bool
+    public typealias State = Bool
     public typealias Body = Self
     
     /// The required number of taps to complete the tap gesture.

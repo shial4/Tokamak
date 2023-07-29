@@ -17,7 +17,7 @@
 
 public struct _ChangedGesture<G>: Gesture where G: Gesture {
     public typealias Ended = G.Ended
-    public typealias Updating = G.Updating
+    public typealias State = G.State
     public typealias Body = G.Body
     
     public var gesture: G
