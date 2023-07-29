@@ -25,7 +25,8 @@ public protocol Gesture {
 
 extension Gesture {
     public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
-        AnyView(content)
+        print("🟡 TapGesture._makeGesture")
+        return AnyView(content.overlay(Text("0")))
     }
 }
 

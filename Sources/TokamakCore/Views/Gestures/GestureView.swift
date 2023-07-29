@@ -20,12 +20,14 @@ public struct _GestureView<Content: View, Action: Gesture>: View {
     public let content: Content
 
     public init(_ content: Content, gesture: Action) {
+        print("🟢 init _GestureView")
         self.content = content
         self._gesture = State(wrappedValue: gesture)
     }
     
     public var body: some View {
-        Action._makeGesture(gesture: $gesture, content: content)
+        print("🟢 body _GestureView")
+        return Action._makeGesture(gesture: $gesture, content: content)
     }
 }
 

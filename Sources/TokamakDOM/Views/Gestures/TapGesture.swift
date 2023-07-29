@@ -22,7 +22,8 @@ import Foundation
 
 extension TapGesture {
     public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
-        AnyView(
+        print("🔵 TapGesture._makeGesture")
+        return AnyView(
             DynamicHTML("div", [:], listeners: [
                 "onclick": { event in
                     print("🟢 onclick", gesture.state)
