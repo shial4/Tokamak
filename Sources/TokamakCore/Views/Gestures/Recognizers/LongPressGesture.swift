@@ -22,12 +22,14 @@ public struct LongPressGesture: Gesture {
     
     private var minimumDuration: Double
     private var maximumDistance: Double = 0
+    private var isPressed = false
     private var touchStartTime = Date()
     public var state: GestureValue<Bool> = .init(phase: .none, value: false) {
         didSet {
             // Recognise touch down with in a view
             if case .began = state.phase {
                 state.value = false
+                isPressed = true
                 touchStartTime = Date()
                 print("✅", state.phase, state.value)
             }
@@ -35,17 +37,18 @@ public struct LongPressGesture: Gesture {
             let touch = Date()
             let delayInSeconds = touch.timeIntervalSince(touchStartTime)
             
-            if case .changed = state.phase {
+            if isPressed, case .changed = state.phase {
                 print("🟤", state.phase, state.value)
             }
             
-            if case .changed = state.phase, minimumDuration < delayInSeconds  {
+            if isPressed, case .changed = state.phase, minimumDuration < delayInSeconds  {
                 state.value = true
             }
             
             // If we ended touch and have desired count we complete gesture
             if case .ended = state.phase, minimumDuration < delayInSeconds  {
                 print("✅", state.phase, state.value)
+                isPressed = false
                 state.phase = .completed
             }
         }
