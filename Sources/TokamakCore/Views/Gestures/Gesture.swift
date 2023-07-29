@@ -15,10 +15,6 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public protocol GestureRenderer {
-    func makeGestureBody<Value>(gesture: Binding<Value>, content: AnyView) -> AnyView where Value: Gesture
-}
-
 public protocol Gesture {
     associatedtype Value
 
