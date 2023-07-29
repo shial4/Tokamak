@@ -16,7 +16,6 @@
 //
 
 public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
-    public var gesture: G
     public var gestureState: GestureState<Value>
     public var phase: GesturePhase {
         get {
@@ -33,7 +32,14 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
         }
     }
     
+    public var gesture: AnyGesture<G>
+    
+    init(gesture: G, gestureState: GestureState<Value>) {
+        self.gesture = AnyGesture(gesture)
+        self.gestureState = gestureState
+    }
+    
     public func _makeGesture(content: AnyView) -> AnyView {
-        gesture._makeGesture(content: content)
+        gesture.makeGestureFn(AnyView(content))
     }
 }
