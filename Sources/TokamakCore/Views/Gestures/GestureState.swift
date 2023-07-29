@@ -15,7 +15,7 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public typealias GestureState = State
+public typealias GestureState = Binding
 
 //@propertyWrapper
 //public struct GestureState<Value> {
