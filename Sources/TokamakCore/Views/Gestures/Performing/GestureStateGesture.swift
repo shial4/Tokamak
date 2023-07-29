@@ -40,6 +40,6 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
     }
     
     public func _makeGesture(content: AnyView) -> AnyView {
-        gesture.makeGestureFn(AnyView(content))
+        gesture.makeGestureFn(content)
     }
 }
