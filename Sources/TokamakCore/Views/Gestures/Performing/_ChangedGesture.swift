@@ -21,7 +21,7 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
     public typealias Body = G.Body
     
     public var gesture: G
-    public let action: (Updating) -> Void
+    public let action: (Ended) -> Void
     public var gestureValue: GestureValue<G.Value> {
         get {
             gesture.gestureValue
@@ -34,7 +34,7 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
         }
     }
     
-    init(gesture: G, action: @escaping (Updating) -> Void) {
+    init(gesture: G, action: @escaping (Ended) -> Void) {
         self.gesture = gesture
         self.action = action
     }
