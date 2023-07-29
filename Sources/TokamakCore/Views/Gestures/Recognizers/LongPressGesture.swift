@@ -79,6 +79,19 @@ public struct LongPressGesture: Gesture {
     }
 }
 
+
+// MARK: Performing the gesture
+
+extension LongPressGesture {
+    /// Adds an action to perform when the gesture’s value changes.
+    /// Available when Value conforms to Equatable.
+    public func onChanged(_ action: @escaping (Updating) -> Void) -> _ChangedGesture<Self> {
+        _ChangedGesture(gesture: self, action: action)
+    }
+}
+
+// MARK: View Modifiers
+
 extension View {
     /// Adds an action to perform when this view recognizes a remote long touch gesture.
     /// A long touch gesture is when the finger is on the remote touch surface without actually pressing.

@@ -16,6 +16,8 @@
 //
 
 public struct AnyGesture<G: Gesture>: Gesture {
+    public typealias Ended = G.Ended
+    public typealias Updating = G.Updating
     public typealias Body = G.Body
     
     private var gesture: G

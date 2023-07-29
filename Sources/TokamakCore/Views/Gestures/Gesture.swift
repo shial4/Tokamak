@@ -17,6 +17,8 @@
 
 public protocol Gesture {
     associatedtype Value
+    associatedtype Ended
+    associatedtype Updating
     associatedtype Body: Gesture where Body.Value == Value
 
     var gestureValue: GestureValue<Value> { get set }
@@ -48,21 +50,13 @@ extension Gesture {
 
 extension Gesture {
     /// Adds an action to perform when the gesture ends.
-    public func onEnded(_ action: @escaping (Value) -> Void) -> _EndedGesture<Self> {
+    public func onEnded(_ action: @escaping (Ended) -> Void) -> _EndedGesture<Self> {
         _EndedGesture(gesture: self, action: action)
     }
     
     /// Updates the provided gesture value property as the gesture’s value changes.
-    public func updating<State>(_ value: GestureState<State>, body: @escaping (Value, inout State, inout Transaction) -> Void) -> GestureStateGesture<Self, State> {
+    public func updating(_ value: GestureState<Updating>, body: @escaping (Value, inout Updating, inout Transaction) -> Void) -> GestureStateGesture<Self> {
         GestureStateGesture(gesture: self, gestureState: value)
-    }
-}
-
-extension Gesture where Value: Equatable {
-    /// Adds an action to perform when the gesture’s value changes.
-    /// Available when Value conforms to Equatable.
-    public func onChanged(_ action: @escaping (Value) -> Void) -> _ChangedGesture<Self> {
-        _ChangedGesture(gesture: self, action: action)
     }
 }
 

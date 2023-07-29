@@ -18,6 +18,8 @@
 import Foundation
 
 public struct TapGesture: Gesture {
+    public typealias Ended = Void
+    public typealias Updating = Bool
     public typealias Body = Self
     
     /// The required number of taps to complete the tap gesture.
@@ -65,14 +67,13 @@ public struct TapGesture: Gesture {
     }
 }
 
+// MARK: View Modifiers
+
 extension View {
     /// Adds an action to perform when this view recognizes a tap gesture.
     public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View {
         self.gesture(
-            TapGesture(count: count)
-                .onEnded { _ in
-                    action()
-                }
+            TapGesture(count: count).onEnded(action)
         )
     }
 }
