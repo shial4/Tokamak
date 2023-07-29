@@ -15,33 +15,35 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-@propertyWrapper
-public struct GestureState<Value> {
-    public var value: Value
+public typealias GestureState = State
 
-    public init(wrappedValue: Value) {
-        self.value = wrappedValue
-    }
-
-    public var wrappedValue: Value {
-        get { value }
-        mutating set { value = newValue }
-    }
-
-    public var projectedValue: GestureState<Value> {
-        self
-    }
-
-    struct Setter {
-        private var _value: Value
-
-        init(_ value: Value) {
-            self._value = value
-        }
-
-        var wrappedValue: Value {
-            get { _value }
-            mutating set { _value = newValue }
-        }
-    }
-}
+//@propertyWrapper
+//public struct GestureState<Value> {
+//    public var value: Value
+//
+//    public init(wrappedValue: Value) {
+//        self.value = wrappedValue
+//    }
+//
+//    public var wrappedValue: Value {
+//        get { value }
+//        mutating set { value = newValue }
+//    }
+//
+//    public var projectedValue: GestureState<Value> {
+//        self
+//    }
+//
+//    struct Setter {
+//        private var _value: Value
+//
+//        init(_ value: Value) {
+//            self._value = value
+//        }
+//
+//        var wrappedValue: Value {
+//            get { _value }
+//            mutating set { _value = newValue }
+//        }
+//    }
+//}
