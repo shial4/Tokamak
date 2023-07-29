@@ -17,6 +17,7 @@
 
 public protocol Gesture {
     associatedtype Value
+    associatedtype Body: Gesture
 
     var state: Value { get set }
     var phase: GesturePhase { get }

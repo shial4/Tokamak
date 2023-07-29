@@ -16,6 +16,8 @@
 //
 
 public struct _EndedGesture<G>: Gesture where G: Gesture {
+    public typealias Body = G
+    
     public var gesture: G
     public let action: (G.Value) -> Void
     public var phase: GesturePhase {

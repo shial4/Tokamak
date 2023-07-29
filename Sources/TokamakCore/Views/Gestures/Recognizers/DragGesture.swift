@@ -18,6 +18,8 @@
 import Foundation
 
 public struct DragGesture: Gesture {
+    public typealias Body = Self
+    
     public struct Value: Equatable {
         /// The location of the drag gesture’s first event.
         public var startLocation: CGPoint = .zero

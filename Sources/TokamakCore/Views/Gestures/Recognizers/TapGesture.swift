@@ -18,6 +18,8 @@
 import Foundation
 
 public struct TapGesture: Gesture {
+    public typealias Body = Self
+    
     private var _state: Int = 0
     public var state: Int {
         get {

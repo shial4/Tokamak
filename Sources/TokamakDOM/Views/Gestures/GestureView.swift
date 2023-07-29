@@ -21,7 +21,7 @@ import TokamakStaticHTML
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
-        print("🔵 TapGesture._makeGesture", gesture.self, gesture.state)
+        print("🔵 TapGesture._makeGesture", gesture.self, G.Body.self)
         return AnyView(
             DynamicHTML("div", [:], listeners: [
                 "onclick": { event in
@@ -34,22 +34,22 @@ extension GestureView: DOMPrimitive {
     }
 }
 
-extension GestureView where G == TapGesture {
-    var renderedBody: AnyView {
-        print("🔵 TapGesture._makeGesture")
-        return AnyView(
-            DynamicHTML("div", [:], listeners: [
-                "onclick": { event in
-                    print("🟢 onclick", gesture.state)
-                    gesture.state = gesture.state + 1
-                }
-            ]) {
-                content
-                    .overlay(Text("X"))
-            }
-        )
-    }
-}
+//extension GestureView where G.Body == TapGesture {
+//    var renderedBody: AnyView {
+//        print("🔵 TapGesture._makeGesture")
+//        return AnyView(
+//            DynamicHTML("div", [:], listeners: [
+//                "onclick": { event in
+//                    print("🟢 onclick", gesture.state)
+//                    gesture.state = gesture.state + 1
+//                }
+//            ]) {
+//                content
+//                    .overlay(Text("X"))
+//            }
+//        )
+//    }
+//}
 
 /*
 func attach(gesture: TapGesture) -> some View {
