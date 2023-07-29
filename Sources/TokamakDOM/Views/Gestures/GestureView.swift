@@ -63,7 +63,7 @@ extension TokamakCore.GestureView: DOMPrimitive {
                     else { return }
                     let offset = CGSize(width: x, height: y)
 //                    print("📐", offset)
-//                    gesture.phase = .changed
+                    gesture.phase = .changed
                   },
             ]) {
                 content
