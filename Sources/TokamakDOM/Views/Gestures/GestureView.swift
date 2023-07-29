@@ -19,10 +19,23 @@ import JavaScriptKit
 import TokamakCore
 import TokamakStaticHTML
 
-import TokamakCore
-import TokamakStaticHTML
+extension GestureView: DOMPrimitive {
+    var renderedBody: AnyView {
+        print("🔵 TapGesture._makeGesture")
+        return AnyView(
+            DynamicHTML("div", [:], listeners: [
+                "onclick": { event in
+                    print("🟢 onclick", gesture.self, gesture.state)
+                }
+            ]) {
+                content
+                    .overlay(Text("X"))
+            }
+        )
+    }
+}
 
-extension GestureView: DOMPrimitive where G == TapGesture {
+extension GestureView where G == TapGesture {
     var renderedBody: AnyView {
         print("🔵 TapGesture._makeGesture")
         return AnyView(
