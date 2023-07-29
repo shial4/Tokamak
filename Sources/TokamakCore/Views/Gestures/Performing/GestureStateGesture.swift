@@ -15,13 +15,21 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
+public struct GestureStateGesture<G>: Gesture where G: Gesture {
     public typealias Ended = G.Ended
     public typealias State = G.State
     public typealias Body = G.Body
     
     public var gesture: G
-    public var gestureState: GestureState<Value>
+    public var gestureState: GestureState<State>
+    public var endState: Ended {
+        gesture.endState
+    }
+    
+    public var state: State {
+        gesture.state
+    }
+    
     public var gestureValue: GestureValue<G.Value> {
         get {
             gesture.gestureValue
@@ -30,12 +38,12 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
             gesture.gestureValue = newValue
             
             if [GesturePhase.began, GesturePhase.changed].contains(gestureValue.phase) {
-                print("GestureStateGesture should update", gestureValue.phase)
+                gestureState.wrappedValue = state
             }
         }
     }
     
-    init(gesture: G, gestureState: GestureState<Value>) {
+    init(gesture: G, gestureState: GestureState<State>) {
         self.gesture = gesture
         self.gestureState = gestureState
     }

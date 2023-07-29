@@ -22,6 +22,14 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
     
     public var gesture: G
     public let action: (Ended) -> Void
+    public var endState: Ended {
+        gesture.endState
+    }
+    
+    public var state: State {
+        gesture.state
+    }
+    
     public var gestureValue: GestureValue<G.Value> {
         get {
             gesture.gestureValue
@@ -29,8 +37,7 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
         set {
             let oldValue = gesture.value
             gesture.gestureValue = newValue
-            print("_ChangedGesture")
-//            action(gesture.value)
+            action(endState)
         }
     }
     

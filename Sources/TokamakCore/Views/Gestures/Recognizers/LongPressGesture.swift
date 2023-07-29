@@ -18,14 +18,25 @@
 import Foundation
 
 public struct LongPressGesture: Gesture {
-    public typealias Ended = Bool
-    public typealias State = Bool
     public typealias Body = Self
     
     private var minimumDuration: Double
     private var maximumDistance: Double = 0
     private var isPressed = false
     private var touchStartTime = Date()
+    
+    private var minimumDurationInNanoseconds: UInt64 {
+        let secondsToNanoseconds = 1_000_000_000
+        return UInt64(minimumDuration * Double(secondsToNanoseconds))
+    }
+    
+    public var endState: Bool {
+        gestureValue.phase == .completed
+    }
+    
+    public var state: Bool {
+        isPressed
+    }
     
     public var gestureValue: GestureValue<Bool> = .init(phase: .none, value: false) {
         didSet {
@@ -35,6 +46,11 @@ public struct LongPressGesture: Gesture {
                 isPressed = true
                 touchStartTime = Date()
                 print("✅", gestureValue.phase, gestureValue.value)
+//                let nanoseconds = minimumDurationInNanoseconds
+//                Task {
+//                    try await Task.sleep(nanoseconds: nanoseconds)
+//                    doStuff()
+//                }
             }
             
             let touch = Date()
@@ -49,7 +65,7 @@ public struct LongPressGesture: Gesture {
             }
             
             // If we ended touch and have desired count we complete gesture
-            if case .ended = gestureValue.phase, minimumDuration < delayInSeconds  {
+            if case .ended = gestureValue.phase, minimumDuration < delayInSeconds {
                 print("✅", gestureValue.phase, gestureValue.value)
                 isPressed = false
                 gestureValue.phase = .completed

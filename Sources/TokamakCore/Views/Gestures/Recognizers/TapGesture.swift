@@ -18,8 +18,6 @@
 import Foundation
 
 public struct TapGesture: Gesture {
-    public typealias Ended = Void
-    public typealias State = Bool
     public typealias Body = Self
     
     /// The required number of taps to complete the tap gesture.
@@ -27,6 +25,15 @@ public struct TapGesture: Gesture {
     /// The maximum duration between the taps
     private var delay: Double = 0.3
     private var touchEndTime = Date()
+    
+    public var endState: Void {
+        Void()
+    }
+    
+    public var state: Bool {
+        gestureValue.phase == .began
+    }
+    
     
     public var gestureValue: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {

@@ -22,6 +22,14 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
     
     public var gesture: G
     public let action: (Ended) -> Void
+    public var endState: Ended {
+        gesture.endState
+    }
+    
+    public var state: State {
+        gesture.state
+    }
+    
     public var gestureValue: GestureValue<G.Value> {
         get {
             gesture.gestureValue
@@ -31,8 +39,7 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
             
             // If gesture is regonised, trigger end action
             if case .completed = gesture.phase {
-                print("_EndedGesture")
-//                action(gesture.value)
+                action(endState)
             }
         }
     }

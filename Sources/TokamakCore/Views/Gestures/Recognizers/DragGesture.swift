@@ -18,8 +18,6 @@
 import Foundation
 
 public struct DragGesture: Gesture {
-    public typealias Ended = Value
-    public typealias State = CGSize
     public typealias Body = Self
     
     public struct Value: Equatable {
@@ -37,6 +35,14 @@ public struct DragGesture: Gesture {
         
         /// A prediction, based on the current drag velocity, of what the final translation will be if dragging stopped now.
         public var predictedEndTranslation: CGSize = .zero
+    }
+    
+    public var endState: Value {
+        gestureValue.value
+    }
+    
+    public var state: CGSize {
+        .zero
     }
     
     public var gestureValue: GestureValue<Value> = .init(phase: .none, value: Value())
