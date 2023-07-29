@@ -18,6 +18,8 @@
 import Foundation
 
 public struct DragGesture: Gesture {
+    public typealias Ended = Value
+    public typealias Updating = Value
     public typealias Body = Self
     
     public struct Value: Equatable {

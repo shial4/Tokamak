@@ -18,6 +18,8 @@
 import Foundation
 
 public struct LongPressGesture: Gesture {
+    public typealias Ended = Bool
+    public typealias Updating = Bool
     public typealias Body = Self
     
     private var minimumDuration: Double
