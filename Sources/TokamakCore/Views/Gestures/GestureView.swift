@@ -15,19 +15,17 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public struct _GestureView<G: Gesture>: View {
-    @State public var gesture: AnyGesture<G>
-    public let content: AnyView
+public struct _GestureView<Content: View, G: Gesture>: View {
+    @State public var gesture: G
+    public let content: Content
 
-    public init(_ content: AnyView, gesture: AnyGesture<G>) {
-        print("🟢 init _GestureView")
+    public init(_ content: Content, gesture: G) {
         self.content = content
         self._gesture = State(wrappedValue: gesture)
     }
-
+    
     public var body: some View {
-        print("🟢 body _GestureView")
-        return gesture.makeGestureFn(content)
+        gesture._makeGesture(content: AnyView(content))
     }
 }
 
@@ -36,14 +34,47 @@ extension View {
     ///
     /// - Parameter gesture: The gesture to attach.
     /// - Returns: A modified version of the view with the gesture attached.
-    public func gesture<T: Gesture>(_ gesture: T) -> some View where T: Gesture {
-        _GestureView(AnyView(self), gesture: AnyGesture(gesture))
+    public func gesture<T>(_ gesture: T) -> some View where T: Gesture {
+        _GestureView(self, gesture: gesture)
     }
     
     /// Attaches a gesture to the view to process simultaneously with gestures defined by the view.
     /// - Parameter gesture: The gesture to attach.
     /// - Returns: A modified version of the view with the gesture attached.
-    public func simultaneousGesture<T: Gesture>(_ gesture: T) -> some View where T : Gesture {
-        _GestureView(AnyView(self), gesture: AnyGesture(gesture))
+    public func simultaneousGesture<T>(_ gesture: T) -> some View where T : Gesture {
+        _GestureView(self, gesture: gesture)
     }
 }
+
+//public struct _GestureView<G: Gesture>: View {
+//    @State public var gesture: AnyGesture<G>
+//    public let content: AnyView
+//
+//    public init(_ content: AnyView, gesture: AnyGesture<G>) {
+//        print("🟢 init _GestureView")
+//        self.content = content
+//        self._gesture = State(wrappedValue: gesture)
+//    }
+//
+//    public var body: some View {
+//        print("🟢 body _GestureView")
+//        return gesture.makeGestureFn(content)
+//    }
+//}
+//
+//extension View {
+//    /// Attaches a single gesture to the view.
+//    ///
+//    /// - Parameter gesture: The gesture to attach.
+//    /// - Returns: A modified version of the view with the gesture attached.
+//    public func gesture<T: Gesture>(_ gesture: T) -> some View where T: Gesture {
+//        _GestureView(AnyView(self), gesture: AnyGesture(gesture))
+//    }
+//
+//    /// Attaches a gesture to the view to process simultaneously with gestures defined by the view.
+//    /// - Parameter gesture: The gesture to attach.
+//    /// - Returns: A modified version of the view with the gesture attached.
+//    public func simultaneousGesture<T: Gesture>(_ gesture: T) -> some View where T : Gesture {
+//        _GestureView(AnyView(self), gesture: AnyGesture(gesture))
+//    }
+//}

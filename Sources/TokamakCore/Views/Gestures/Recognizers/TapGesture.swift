@@ -52,6 +52,10 @@ public struct TapGesture: Gesture {
         self.count = count
         self.delay = delay
     }
+    
+    public func _makeGesture(content: AnyView) -> AnyView {
+        fatalError("implementation of \(#function) required by \(Self.self)")
+    }
 }
 
 extension View {

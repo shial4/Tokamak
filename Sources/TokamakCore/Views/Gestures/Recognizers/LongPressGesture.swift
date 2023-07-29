@@ -35,6 +35,10 @@ public struct LongPressGesture: Gesture {
         self.minimumDuration = minimumDuration
         self.maximumDistance = maximumDistance
     }
+    
+    public func _makeGesture(content: AnyView) -> AnyView {
+        fatalError("implementation of \(#function) required by \(Self.self)")
+    }
 }
 
 extension View {

@@ -46,4 +46,8 @@ public struct DragGesture: Gesture {
     public init(minimumDistance: CGFloat) {
         self.minimumDistance = minimumDistance
     }
+    
+    public func _makeGesture(content: AnyView) -> AnyView {
+        fatalError("implementation of \(#function) required by \(Self.self)")
+    }
 }

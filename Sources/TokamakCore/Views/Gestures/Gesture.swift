@@ -20,13 +20,8 @@ public protocol Gesture {
 
     var state: Value { get set }
     var phase: GesturePhase { get }
+    
     func _makeGesture(content: AnyView) -> AnyView
-}
-
-extension Gesture {
-    public func _makeGesture(content: AnyView) -> AnyView {
-        fatalError("implementation of \(#function) required by \(Self.self)")
-    }
 }
 
 // MARK: Performing the gesture
