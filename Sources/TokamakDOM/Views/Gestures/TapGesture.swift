@@ -21,7 +21,7 @@ import TokamakStaticHTML
 import Foundation
 
 extension TapGesture {
-    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
+    static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
         print("🔵 TapGesture._makeGesture")
         return AnyView(
             DynamicHTML("div", [:], listeners: [

@@ -23,12 +23,12 @@ public protocol Gesture {
     static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView
 }
 
-extension Gesture {
-    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
-        print("🟡 TapGesture._makeGesture")
-        return AnyView(content.overlay(Text("0")))
-    }
-}
+//extension Gesture {
+//    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
+//        print("🟡 TapGesture._makeGesture")
+//        return Self._makeGesture(gesture: gesture, content: content)
+//    }
+//}
 
 // MARK: Performing the gesture
 
