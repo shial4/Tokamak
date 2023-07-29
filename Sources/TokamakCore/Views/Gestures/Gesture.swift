@@ -23,12 +23,11 @@ public protocol Gesture {
     static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView
 }
 
-//extension Gesture {
-//    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
-//        print("🟡 TapGesture._makeGesture")
-//        return Self._makeGesture(gesture: gesture, content: content)
-//    }
-//}
+extension Gesture {
+    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
+        fatalError("implementation of \(#function) required by \(Self.self)")
+    }
+}
 
 // MARK: Performing the gesture
 
