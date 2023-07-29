@@ -15,11 +15,11 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public struct _GestureView<Action: Gesture>: View {
-    @State public var gesture: AnyGesture<Action>
+public struct _GestureView<G: Gesture>: View {
+    @State public var gesture: AnyGesture<G>
     public let content: AnyView
 
-    public init(_ content: AnyView, gesture: AnyGesture<Action>) {
+    public init(_ content: AnyView, gesture: AnyGesture<G>) {
         print("🟢 init _GestureView")
         self.content = content
         self._gesture = State(wrappedValue: gesture)
@@ -27,7 +27,7 @@ public struct _GestureView<Action: Gesture>: View {
 
     public var body: some View {
         print("🟢 body _GestureView")
-        return gesture._makeGesture(content: content)
+        return gesture.makeGestureFn(content)
     }
 }
 

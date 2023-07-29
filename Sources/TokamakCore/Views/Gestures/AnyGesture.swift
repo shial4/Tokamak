@@ -16,7 +16,7 @@
 //
 
 public struct AnyGesture<G: Gesture>: Gesture {
-    private let makeGestureFn: (AnyView) -> AnyView
+    public let makeGestureFn: (AnyView) -> AnyView
     public var state: G.Value
     public var phase: GesturePhase
 
