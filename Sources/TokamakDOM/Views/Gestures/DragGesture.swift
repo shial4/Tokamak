@@ -21,7 +21,7 @@ import TokamakStaticHTML
 import Foundation
 
 extension DragGesture {
-    public mutating func _makeGesture(content: Content) -> AnyView {
-        AnyView(content)
+    public mutating func _makeGesture(content: AnyView) -> AnyView {
+        content
     }
 }

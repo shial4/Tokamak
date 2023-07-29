@@ -16,24 +16,19 @@
 //
 
 public struct AnyGesture<G: Gesture>: Gesture {
-    public typealias Content = AnyView
-
-    private let makeGestureFn: (Any) -> AnyView
+    private let makeGestureFn: (AnyView) -> AnyView
     public var state: G.Value
     public var phase: GesturePhase
 
     public init(_ gesture: G) where G.Value == Value {
         makeGestureFn = { content in
-            guard let content = content as? G.Content else {
-                fatalError("Incorrect content type")
-            }
             return gesture._makeGesture(content: content)
         }
         state = gesture.state
         phase = gesture.phase
     }
 
-    public func _makeGesture(content: Any) -> AnyView {
+    public func _makeGesture(content: AnyView) -> AnyView {
         makeGestureFn(content)
     }
 }

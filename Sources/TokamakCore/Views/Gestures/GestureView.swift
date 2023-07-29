@@ -15,11 +15,11 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public struct _GestureView<Content: View, Action: Gesture>: View {
+public struct _GestureView<Action: Gesture>: View {
     @State public var gesture: AnyGesture<Action>
-    public let content: Content
+    public let content: AnyView
 
-    public init(_ content: Content, gesture: AnyGesture<Action>) {
+    public init(_ content: AnyView, gesture: AnyGesture<Action>) {
         print("🟢 init _GestureView")
         self.content = content
         self._gesture = State(wrappedValue: gesture)
@@ -37,13 +37,13 @@ extension View {
     /// - Parameter gesture: The gesture to attach.
     /// - Returns: A modified version of the view with the gesture attached.
     public func gesture<T: Gesture>(_ gesture: T) -> some View where T: Gesture {
-        _GestureView(self, gesture: AnyGesture(gesture))
+        _GestureView(AnyView(self), gesture: AnyGesture(gesture))
     }
     
     /// Attaches a gesture to the view to process simultaneously with gestures defined by the view.
     /// - Parameter gesture: The gesture to attach.
     /// - Returns: A modified version of the view with the gesture attached.
     public func simultaneousGesture<T: Gesture>(_ gesture: T) -> some View where T : Gesture {
-        _GestureView(self, gesture: AnyGesture(gesture))
+        _GestureView(AnyView(self), gesture: AnyGesture(gesture))
     }
 }

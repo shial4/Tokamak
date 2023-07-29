@@ -22,7 +22,7 @@ import Foundation
 
 extension LongPressGesture {
     public mutating func _makeGesture(content: Content) -> AnyView {
-        AnyView(content)
+        content
     }
     
     /*
