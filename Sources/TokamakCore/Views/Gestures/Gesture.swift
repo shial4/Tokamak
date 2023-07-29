@@ -16,30 +16,32 @@
 //
 
 public protocol Gesture {
+    associatedtype State
     associatedtype Value: Equatable
     associatedtype Body: Gesture where Body.Value == Value
 
-    var state: GestureValue<Value> { get set }
+    var state: State { get }
+    var gestureValue: GestureValue<Value> { get set }
 }
 
 extension Gesture {
     public var value: Value {
         get {
-            state.value
+            gestureValue.value
         }
         
         set {
-            state.value = newValue
+            gestureValue.value = newValue
         }
     }
 
     public var phase: GesturePhase {
         get {
-            state.phase
+            gestureValue.phase
         }
         
         set {
-            state.phase = newValue
+            gestureValue.phase = newValue
         }
     }
 }
@@ -53,7 +55,7 @@ extension Gesture {
     }
     
     /// Updates the provided gesture value property as the gesture’s value changes.
-    public func updating<State>(_ value: GestureState<State>, body: @escaping (Value, inout State, inout Transaction) -> Void) -> GestureStateGesture<Self, State> {
+    public func updating(_ value: GestureState<State>, body: @escaping (Value, inout State, inout Transaction) -> Void) -> GestureStateGesture<Self> {
         GestureStateGesture(gesture: self, gestureState: value)
     }
 }

@@ -24,32 +24,36 @@ public struct LongPressGesture: Gesture {
     private var maximumDistance: Double = 0
     private var isPressed = false
     private var touchStartTime = Date()
-    public var state: GestureValue<Bool> = .init(phase: .none, value: false) {
+    public var state: Bool {
+        return isPressed && gestureValue.value
+    }
+    
+    public var gestureValue: GestureValue<Bool> = .init(phase: .none, value: false) {
         didSet {
             // Recognise touch down with in a view
-            if case .began = state.phase {
-                state.value = false
+            if case .began = gestureValue.phase {
+                gestureValue.value = false
                 isPressed = true
                 touchStartTime = Date()
-                print("✅", state.phase, state.value)
+                print("✅", gestureValue.phase, gestureValue.value)
             }
             
             let touch = Date()
             let delayInSeconds = touch.timeIntervalSince(touchStartTime)
             
-            if isPressed, case .changed = state.phase {
-                print("🟤", state.phase, state.value)
+            if isPressed, case .changed = gestureValue.phase {
+                print("🟤", gestureValue.phase, gestureValue.value)
             }
             
-            if isPressed, case .changed = state.phase, minimumDuration < delayInSeconds  {
-                state.value = true
+            if isPressed, case .changed = gestureValue.phase, minimumDuration < delayInSeconds  {
+                gestureValue.value = true
             }
             
             // If we ended touch and have desired count we complete gesture
-            if case .ended = state.phase, minimumDuration < delayInSeconds  {
-                print("✅", state.phase, state.value)
+            if case .ended = gestureValue.phase, minimumDuration < delayInSeconds  {
+                print("✅", gestureValue.phase, gestureValue.value)
                 isPressed = false
-                state.phase = .completed
+                gestureValue.phase = .completed
             }
         }
     }

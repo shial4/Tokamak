@@ -25,35 +25,38 @@ public struct TapGesture: Gesture {
     /// The maximum duration between the taps
     private var delay: Double = 0.3
     private var touchEndTime = Date()
+    public var state: Bool {
+        return gestureValue.phase == .began
+    }
     
-    public var state: GestureValue<Int> = .init(phase: .none, value: 0) {
+    public var gestureValue: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {
             // Recognise touch down with in a view
-            if case .began = state.phase {
+            if case .began = gestureValue.phase {
                 // If current phase is completed start from the beginign
                 if case .completed = oldValue.phase {
-                    state.value = 0
+                    gestureValue.value = 0
                 }
             }
             // Recognise touch up with in a view
-            else if case .ended = state.phase, case .began = oldValue.phase {
+            else if case .ended = gestureValue.phase, case .began = oldValue.phase {
                 let touch = Date()
                 let delayInSeconds = touch.timeIntervalSince(touchEndTime)
                 touchEndTime = touch
             
                 // If we have multi count tap gesture, handle it if the taps are with in desired delays
-                if state.value > 0, delayInSeconds > delay {
-                    state.value = 0
+                if gestureValue.value > 0, delayInSeconds > delay {
+                    gestureValue.value = 0
                 } else {
-                    state.value += 1
+                    gestureValue.value += 1
                 }
             } else {
-                state.value = 0
+                gestureValue.value = 0
             }
             
             // If we ended touch and have desired count we complete gesture
-            if case .ended = state.phase, count == state.value {
-                state.phase = .completed
+            if case .ended = gestureValue.phase, count == gestureValue.value {
+                gestureValue.phase = .completed
             }
         }
     }

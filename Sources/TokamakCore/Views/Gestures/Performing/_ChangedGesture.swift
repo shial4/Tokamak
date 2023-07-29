@@ -20,13 +20,17 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
     
     public var gesture: G
     public let action: (G.Value) -> Void
-    public var state: GestureValue<G.Value> {
+    public var state: G.State {
+        gesture.state
+    }
+    
+    public var gestureValue: GestureValue<G.Value> {
         get {
-            gesture.state
+            gesture.gestureValue
         }
         set {
             let oldValue = gesture.value
-            gesture.state = newValue
+            gesture.gestureValue = newValue
             
             // If gesture changed, trigger change action
             if gesture.value != oldValue {

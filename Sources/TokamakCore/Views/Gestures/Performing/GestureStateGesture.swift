@@ -15,26 +15,28 @@
 //  Created by Szymon on 16/7/2023.
 //
 
-public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
+public struct GestureStateGesture<G>: Gesture where G: Gesture {
     public typealias Body = G.Body
     
     public var gesture: G
-    public var gestureState: GestureState<Value>
-    public var state: GestureValue<G.Value> {
+    public var gestureState: GestureState<G.State>
+    public var state: G.State {
+        gesture.state
+    }
+    
+    public var gestureValue: GestureValue<G.Value> {
         get {
-            gesture.state
+            gesture.gestureValue
         }
         set {
-            gesture.state = newValue
-            
-            print("GestureStateGesture", gesture.value as? Value, gesture.value.self, Value.self)
-            if let value = gesture.value as? Value {
-                gestureState.value = value
+            gesture.gestureValue = newValue
+            if [GesturePhase.began, GesturePhase.changed].contains(gestureValue.phase) {
+                gestureState.value = state
             }
         }
     }
     
-    init(gesture: G, gestureState: GestureState<Value>) {
+    init(gesture: G, gestureState: GestureState<G.State>) {
         self.gesture = gesture
         self.gestureState = gestureState
     }
