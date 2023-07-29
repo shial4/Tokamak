@@ -37,7 +37,7 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
         }
     }
     
-    public init(_ gesture: G, action: @escaping (Value) -> Void) where G.Value == Value {
+    public init(gesture: G, action: @escaping (Value) -> Void) where G.Value == Value {
         self.action = action
         self.gesture = gesture
         self.makeGestureFn = { content in
