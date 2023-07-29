@@ -21,7 +21,7 @@ import TokamakStaticHTML
 import Foundation
 
 extension LongPressGesture {
-    public static func _makeGesture(gesture: Self, content: any View) -> AnyView {
+    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
         AnyView(content)
     }
     

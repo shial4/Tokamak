@@ -20,11 +20,11 @@ public protocol Gesture {
     
     var state: Value { get set }
     var phase: GesturePhase { get }
-    static func _makeGesture(gesture: Binding<Self>, content: any View) -> AnyView
+    static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView
 }
 
 extension Gesture {
-    public static func _makeGesture(gesture: Binding<Self>, content: any View) -> AnyView {
+    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
         AnyView(content)
     }
 }
