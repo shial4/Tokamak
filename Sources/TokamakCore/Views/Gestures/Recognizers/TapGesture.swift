@@ -38,10 +38,11 @@ public struct TapGesture: Gesture {
                 touchEndTime = touch
             
                 
-                print("🚀", state.value, delayInSeconds)
-                if state.value > 1, delayInSeconds <= delay {
+                if state.value > 1, delayInSeconds > delay {
+                    print("🔴", state.value, " - ", delayInSeconds)
                     state.value = 0
                 } else {
+                    print("🔵", state.value, " - ", delayInSeconds)
                     state.value += 1
                 }
             } else {
@@ -49,6 +50,7 @@ public struct TapGesture: Gesture {
             }
             
             if case .ended = state.phase, count == state.value {
+                print("🟢", state.value)
                 state.phase = .completed
             }
         }
