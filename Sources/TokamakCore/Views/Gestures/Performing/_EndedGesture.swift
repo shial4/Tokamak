@@ -40,8 +40,4 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
         self.gesture = gesture
         self.action = action
     }
-    
-    public static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView {
-        G._makeGesture(gesture: gesture.gesture, content: content)
-    }
 }

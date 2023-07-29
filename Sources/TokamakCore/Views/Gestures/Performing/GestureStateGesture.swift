@@ -37,8 +37,4 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
         self.gesture = gesture
         self.gestureState = gestureState
     }
-    
-    public static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView {
-        G._makeGesture(gesture: gesture.gesture, content: content)
-    }
 }

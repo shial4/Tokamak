@@ -35,8 +35,4 @@ public struct AnyGesture<G: Gesture>: Gesture {
     public init(_ gesture: G) where G.Value == Value {
         self.gesture = gesture
     }
-
-    public static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView {
-        G._makeGesture(gesture: gesture.gesture, content: content)
-    }
 }

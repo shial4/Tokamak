@@ -15,20 +15,15 @@
 //  Created by Szymon on 16/7/2023.
 //
 
+public protocol GestureRenderer {
+    func makeGestureBody<Value>(gesture: Binding<Value>, content: AnyView) -> AnyView where Value: Gesture
+}
+
 public protocol Gesture {
     associatedtype Value
 
     var state: Value { get set }
     var phase: GesturePhase { get }
-    
-    static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView
-}
-
-extension Gesture {
-    public static func _makeGesture(gesture: Binding<Self>, content: AnyView) -> AnyView {
-//        Self._makeGesture(gesture: gesture, content: content)
-        fatalError("implementation of \(#function) required by \(Self.self)")
-    }
 }
 
 // MARK: Performing the gesture
