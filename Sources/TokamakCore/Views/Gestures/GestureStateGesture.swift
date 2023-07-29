@@ -32,4 +32,8 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
             gesture.state = newValue
         }
     }
+    
+    public func _makeGesture(content: AnyView) -> AnyView {
+        gesture._makeGesture(content: content)
+    }
 }
