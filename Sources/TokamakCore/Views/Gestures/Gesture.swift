@@ -17,14 +17,15 @@
 
 public protocol Gesture {
     associatedtype Value
-    
+    associatedtype Content: View
+
     var state: Value { get set }
     var phase: GesturePhase { get }
-    static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView
+    func _makeGesture(content: Content) -> AnyView
 }
 
 extension Gesture {
-    public static func _makeGesture<Content: View>(gesture: Binding<Self>, content: Content) -> AnyView {
+    public func _makeGesture(content: Content) -> AnyView {
         fatalError("implementation of \(#function) required by \(Self.self)")
     }
 }
