@@ -21,11 +21,11 @@ import TokamakStaticHTML
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
-        print("🔵 TapGesture._makeGesture", gesture.self, G.Body.self)
+        print("🔵 GestureView", G.Body.self)
         return AnyView(
-            DynamicHTML("input", [:], listeners: [
+            DynamicHTML("div", listeners: [
                 "onclick": { event in
-                    print("🟢 onclick", gesture.self, gesture.state)
+                    print("🟢 onclick", G.Body.self)
                 }
             ]) {
                 content
