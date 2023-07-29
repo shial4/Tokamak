@@ -28,7 +28,10 @@ extension TokamakCore.GestureView: DOMPrimitive {
         case is LongPressGesture.Type:
             return longPressGestureBody
         default:
-            return AnyView(content.overlay(Text("🛑 \(G.Body.self)")))
+            return AnyView(content.overlay(
+                Text("\(G.Body.self)")
+                    .font(.caption)
+            ))
         }
     }
     
