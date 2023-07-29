@@ -29,6 +29,7 @@ extension GestureView: DOMPrimitive {
             return longPressGestureBody
         default:
             return AnyView(content)
+                    .overlay(Text("🛑"))
         }
     }
     
