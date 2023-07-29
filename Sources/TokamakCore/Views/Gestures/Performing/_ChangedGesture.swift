@@ -32,10 +32,7 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
             let oldValue = gesture.value
             gesture.gestureValue = newValue
             
-            // If gesture changed, trigger change action
-            if gesture.value != oldValue {
-                action(gesture.value)
-            }
+            action(gesture.value)
         }
     }
     
