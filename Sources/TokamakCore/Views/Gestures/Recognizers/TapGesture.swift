@@ -24,7 +24,7 @@ public struct TapGesture: Gesture {
     private var count: Int
     /// The maximum duration between the taps
     private var delay: Double = 0.3
-    private var touchTime = Date()
+    private var touchEndTime = Date()
     
     public var state: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {
@@ -33,12 +33,12 @@ public struct TapGesture: Gesture {
                 if case .completed = oldValue.phase {
                     state.value = 0
                 }
-                touchTime = Date()
             } else if case .ended = state.phase, case .began = oldValue.phase {
                 let touch = Date()
-                let delayInSeconds = touch.timeIntervalSince(touchTime)
+                let delayInSeconds = touch.timeIntervalSince(touchEndTime)
+                touchEndTime = touch
             
-                if delayInSeconds > delay {
+                if count > 1, delayInSeconds > delay {
                     state.value = 0
                 } else {
                     state.value += 1
