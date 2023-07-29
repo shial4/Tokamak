@@ -16,7 +16,7 @@
 //
 
 public struct AnyGesture<G: Gesture>: Gesture {
-    public typealias Body = G
+    public typealias Body = G.Body
     
     private var gesture: G
     public var state: GestureValue<G.Value> {

@@ -16,7 +16,7 @@
 //
 
 public struct _ChangedGesture<G>: Gesture where G: Gesture {
-    public typealias Body = G
+    public typealias Body = G.Body
     
     public var gesture: G
     public let action: (G.Value) -> Void
