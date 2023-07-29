@@ -16,6 +16,8 @@
 //
 
 public struct AnyGesture<G: Gesture>: Gesture {
+    public typealias Body = Self
+    
     private var gesture: G
     public var phase: GesturePhase {
         get {
