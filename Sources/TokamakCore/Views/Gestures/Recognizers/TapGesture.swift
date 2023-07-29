@@ -39,7 +39,7 @@ public struct TapGesture: Gesture {
             
                 
                 print("🚀", state.value, delayInSeconds)
-                if state.value > 1, delayInSeconds > delay {
+                if state.value > 1, delayInSeconds <= delay {
                     state.value = 0
                 } else {
                     state.value += 1
