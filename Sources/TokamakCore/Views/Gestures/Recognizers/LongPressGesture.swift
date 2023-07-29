@@ -35,6 +35,10 @@ public struct LongPressGesture: Gesture {
             let touch = Date()
             let delayInSeconds = touch.timeIntervalSince(touchStartTime)
             
+            if case .changed = state.phase {
+                print("🟤", state.phase, state.value)
+            }
+            
             if case .changed = state.phase, minimumDuration < delayInSeconds  {
                 state.value = true
             }
