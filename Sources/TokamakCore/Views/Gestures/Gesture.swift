@@ -17,7 +17,7 @@
 
 public protocol Gesture {
     associatedtype State
-    associatedtype Value: Equatable
+    associatedtype Value
     associatedtype Body: Gesture where Body.Value == Value
 
     var state: State { get }
