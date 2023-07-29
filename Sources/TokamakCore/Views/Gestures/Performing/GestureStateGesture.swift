@@ -37,7 +37,7 @@ public struct GestureStateGesture<G>: Gesture where G: Gesture {
         set {
             gesture.gestureValue = newValue
             
-            if [GesturePhase.began, GesturePhase.changed].contains(gestureValue.phase) {
+            if [GesturePhase.began, GesturePhase.changed, GesturePhase.ended].contains(gestureValue.phase) {
                 gestureState.wrappedValue = state
             }
         }
