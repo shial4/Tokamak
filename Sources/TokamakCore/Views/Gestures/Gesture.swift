@@ -25,7 +25,7 @@ public protocol Gesture {
 }
 
 extension Gesture {
-    func _makeGesture(content: AnyView) -> AnyView {
+    public func _makeGesture(content: AnyView) -> AnyView {
         fatalError("implementation of \(#function) required by \(Self.self)")
     }
 }
