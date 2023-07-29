@@ -28,8 +28,7 @@ extension GestureView: DOMPrimitive {
         case is LongPressGesture.Type:
             return longPressGestureBody
         default:
-            return AnyView(content)
-                    .overlay(Text("🛑"))
+            return AnyView(content.overlay(Text("🛑")))
         }
     }
     
@@ -54,9 +53,10 @@ extension GestureView: DOMPrimitive {
                 "pointermove": { event in
                     guard
                       let x = event.offsetX.jsValue.number,
-                      let y = event.offsetY.jsValue.number,
-                      let offset = CGSize(width: x, height: y) as? G.Value
+                      let y = event.offsetY.jsValue.number
                     else { return }
+                    let offset = CGSize(width: x, height: y)
+                    print("📐", offset)
                     gesture.phase = .changed
                   },
             ]) {
