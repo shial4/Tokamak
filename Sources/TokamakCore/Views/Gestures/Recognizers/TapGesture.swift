@@ -38,7 +38,7 @@ public struct TapGesture: Gesture {
                 touchEndTime = touch
             
                 
-                if state.value > 1, delayInSeconds > delay {
+                if state.value > 0, delayInSeconds > delay {
                     print("🔴", state.value, " - ", delayInSeconds)
                     state.value = 0
                 } else {
