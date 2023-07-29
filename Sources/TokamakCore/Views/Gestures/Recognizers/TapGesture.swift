@@ -25,9 +25,6 @@ public struct TapGesture: Gesture {
     /// The maximum duration between the taps
     private var delay: Double = 0.3
     private var touchEndTime = Date()
-    public var state: Bool {
-        return gestureValue.phase == .began
-    }
     
     public var gestureValue: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {

@@ -24,9 +24,6 @@ public struct LongPressGesture: Gesture {
     private var maximumDistance: Double = 0
     private var isPressed = false
     private var touchStartTime = Date()
-    public var state: Bool {
-        return isPressed && gestureValue.value
-    }
     
     public var gestureValue: GestureValue<Bool> = .init(phase: .none, value: false) {
         didSet {

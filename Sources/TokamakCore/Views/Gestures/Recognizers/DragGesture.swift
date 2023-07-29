@@ -37,10 +37,6 @@ public struct DragGesture: Gesture {
         public var predictedEndTranslation: CGSize = .zero
     }
     
-    public var state: Value {
-        return gestureValue.value
-    }
-    
     public var gestureValue: GestureValue<Value> = .init(phase: .none, value: Value())
     
     public var minimumDistance: CGFloat

@@ -20,10 +20,6 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
     
     public var gesture: G
     public let action: (G.Value) -> Void
-    public var state: G.State {
-        gesture.state
-    }
-    
     public var gestureValue: GestureValue<G.Value> {
         get {
             gesture.gestureValue
