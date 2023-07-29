@@ -24,12 +24,14 @@ public struct TapGesture: Gesture {
             return _state
         }
         set {
+            print("🟢 TapGesture set state", newValue, _state, phase)
             guard newValue > 0 else { return }
             let touch = Date()
             let delayInSeconds = touch.timeIntervalSince(touchTime)
             phase = .changed
             touchTime = touch
             
+            print("🟢 TapGesture delayInSeconds", delayInSeconds)
             _state = newValue
             if delayInSeconds > delay {
                 _state = 0

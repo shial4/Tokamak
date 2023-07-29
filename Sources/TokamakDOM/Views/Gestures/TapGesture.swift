@@ -25,10 +25,11 @@ extension TapGesture {
         AnyView(
             DynamicHTML("div", [:], listeners: [
                 "onclick": { event in
+                    print("🟢 onclick", gesture.state)
                     gesture.state.wrappedValue = gesture.state.wrappedValue + 1
                 }
             ]) {
-                content
+                content.overlay(Text("X"))
             }
         )
     }
