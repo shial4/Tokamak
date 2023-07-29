@@ -26,6 +26,9 @@ public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
         }
         set {
             gesture.state = newValue
+            if let value = gesture.value as? Value {
+                gestureState.value = value
+            }
         }
     }
     
