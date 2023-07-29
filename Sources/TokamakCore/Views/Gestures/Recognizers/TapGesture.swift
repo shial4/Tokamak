@@ -28,7 +28,6 @@ public struct TapGesture: Gesture {
     
     public var state: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {
-            print("🚀 phase", state.phase, oldValue.phase)
             if case .began = state.phase {
                 if case .completed = oldValue.phase {
                     state.value = 0
@@ -38,6 +37,8 @@ public struct TapGesture: Gesture {
                 let delayInSeconds = touch.timeIntervalSince(touchEndTime)
                 touchEndTime = touch
             
+                
+                print("🚀", state.value, delayInSeconds)
                 if state.value > 1, delayInSeconds > delay {
                     state.value = 0
                 } else {
