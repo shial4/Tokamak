@@ -15,12 +15,32 @@
 //  Created by Szymon on 16/7/2023.
 //
 
+import Foundation
+
 public struct LongPressGesture: Gesture {
     public typealias Body = Self
     
     private var minimumDuration: Double
     private var maximumDistance: Double = 0
-    public var state: GestureValue<Bool> = .init(phase: .none, value: false)
+    private var touchStartTime = Date()
+    public var state: GestureValue<Bool> = .init(phase: .none, value: false) {
+        didSet {
+            // Recognise touch down with in a view
+            if case .began = state.phase {
+                state.value = false
+                touchStartTime = Date()
+            }
+            
+            let touch = Date()
+            let delayInSeconds = touch.timeIntervalSince(touchStartTime)
+            
+            // If we ended touch and have desired count we complete gesture
+            if case .ended = state.phase, minimumDuration < delayInSeconds  {
+                state.value = true
+                state.phase = .completed
+            }
+        }
+    }
     
     /// Creates a long-press gesture with a minimum duration
     /// - Parameter minimumDuration: The minimum duration of the long press that must elapse before the gesture succeeds.
@@ -35,6 +55,14 @@ public struct LongPressGesture: Gesture {
     public init(minimumDuration: Double, maximumDistance: Double) {
         self.minimumDuration = minimumDuration
         self.maximumDistance = maximumDistance
+    }
+    
+    private func calculateDistance(xOffset: Double, yOffset: Double) -> Double {
+        let xSquared = pow(xOffset, 2)
+        let ySquared = pow(yOffset, 2)
+        let sumOfSquares = xSquared + ySquared
+        let distance = sqrt(sumOfSquares)
+        return distance
     }
 }
 

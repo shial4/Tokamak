@@ -28,29 +28,31 @@ public struct TapGesture: Gesture {
     
     public var state: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {
+            // Recognise touch down with in a view
             if case .began = state.phase {
+                // If current phase is completed start from the beginign
                 if case .completed = oldValue.phase {
                     state.value = 0
                 }
-            } else if case .ended = state.phase, case .began = oldValue.phase {
+            }
+            // Recognise touch up with in a view
+            else if case .ended = state.phase, case .began = oldValue.phase {
                 let touch = Date()
                 let delayInSeconds = touch.timeIntervalSince(touchEndTime)
                 touchEndTime = touch
             
-                
+                // If we have multi count tap gesture, handle it if the taps are with in desired delays
                 if state.value > 0, delayInSeconds > delay {
-                    print("🔴", state.value, " - ", delayInSeconds)
                     state.value = 0
                 } else {
-                    print("🔵", state.value, " - ", delayInSeconds)
                     state.value += 1
                 }
             } else {
                 state.value = 0
             }
             
+            // If we ended touch and have desired count we complete gesture
             if case .ended = state.phase, count == state.value {
-                print("🟢", state.value)
                 state.phase = .completed
             }
         }

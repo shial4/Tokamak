@@ -23,6 +23,16 @@ public protocol Gesture {
 }
 
 extension Gesture {
+    public var value: Value {
+        get {
+            state.value
+        }
+        
+        set {
+            state.value = newValue
+        }
+    }
+
     public var phase: GesturePhase {
         get {
             state.phase

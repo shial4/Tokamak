@@ -18,12 +18,15 @@
 import JavaScriptKit
 import TokamakCore
 import TokamakStaticHTML
+import Foundation
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
         switch G.Body.self {
         case is TapGesture.Type:
             return tapGestureBody
+        case is LongPressGesture.Type:
+            return longPressGestureBody
         default:
             return AnyView(content)
         }
@@ -35,6 +38,26 @@ extension GestureView: DOMPrimitive {
                 "pointerdown": { _ in gesture.phase = .began },
                 "pointerup": { _ in gesture.phase = .ended },
                 "pointercancel": { _ in gesture.phase = .cancelled },
+            ]) {
+                content
+            }
+        )
+    }
+    
+    var longPressGestureBody: AnyView {
+        return AnyView(
+            DynamicHTML("div", [:], listeners: [
+                "pointerdown": { _ in gesture.phase = .began },
+                "pointerup": { _ in gesture.phase = .ended },
+                "pointercancel": { _ in gesture.phase = .cancelled },
+                "pointermove": { event in
+                    guard
+                      let x = event.offsetX.jsValue.number,
+                      let y = event.offsetY.jsValue.number,
+                      let offset = CGSize(width: x, height: y) as? G.Value
+                    else { return }
+                    gesture.phase = .changed
+                  },
             ]) {
                 content
             }

@@ -26,8 +26,10 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
         }
         set {
             gesture.state = newValue
+            
+            // If gesture is regonised, trigger end action
             if case .completed = gesture.phase {
-                action(gesture.state.value)
+                action(gesture.value)
             }
         }
     }

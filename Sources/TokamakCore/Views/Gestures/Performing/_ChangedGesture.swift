@@ -26,6 +26,11 @@ public struct _ChangedGesture<G>: Gesture where G: Gesture {
         }
         set {
             gesture.state = newValue
+            
+            // If gesture changed, trigger change action
+            if case .changed = gesture.phase {
+                action(gesture.value)
+            }
         }
     }
     
