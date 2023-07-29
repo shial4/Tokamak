@@ -31,6 +31,9 @@ extension TokamakCore.GestureView: DOMPrimitive {
             return AnyView(content.overlay(
                 Text("\(G.Body.self)")
                     .font(.caption)
+                    .onAppear {
+                        print("🛑", G.Body.self)
+                    }
             ))
         }
     }
