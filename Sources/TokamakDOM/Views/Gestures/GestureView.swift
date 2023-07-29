@@ -21,13 +21,16 @@ import TokamakStaticHTML
 
 extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
-        print("🔵 GestureView", G.Body.self)
-        return AnyView(content)
+        print("🔵 GestureView", G.Body.self)///pointerup
+        switch G.Body.self {
+        case is TapGesture.Type:
+            return tapGestureBody
+        default:
+            return AnyView(content)
+        }
     }
-}
-
-extension GestureView where G.Body.Type == TapGesture.Type {
-    var renderedBody: AnyView {
+    
+    var tapGestureBody: AnyView {
         print("🟢 GestureView", G.Body.self)
         return AnyView(
             Button(action: {

@@ -16,6 +16,7 @@
 //
 
 public struct GestureView<Content: View, G: Gesture>: _PrimitiveView {
+    @Environment(\.isEnabled) var isEnabled
     @State public var gesture: G
     public let content: Content
 
