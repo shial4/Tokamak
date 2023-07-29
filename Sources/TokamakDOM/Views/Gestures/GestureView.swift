@@ -23,13 +23,20 @@ extension GestureView: DOMPrimitive {
     var renderedBody: AnyView {
         print("🔵 GestureView", G.Body.self)
         return AnyView(
-            DynamicHTML("div", listeners: [
-                "onclick": { event in
-                    print("🟢 onclick", G.Body.self)
-                }
-            ]) {
+            Button(action: {
+                print("🟢 onclick", G.Body.self)
+                
+            }, label: {
                 content
             }
+//            DynamicHTML("div", listeners: [
+//                "onclick": { event in
+//                    print("🟢 onclick", G.Body.self)
+//                }
+//            ]) {
+//                content
+//            }
+        )
         )
     }
 }
