@@ -35,4 +35,8 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
             }
         }
     }
+    
+    public func _makeGesture(content: AnyView) -> AnyView {
+        gesture._makeGesture(content: content)
+    }
 }
