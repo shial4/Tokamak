@@ -18,10 +18,9 @@
 public struct LongPressGesture: Gesture {
     public typealias Body = Self
     
-    public var state: Bool = false
-    public var phase: GesturePhase = .none
     private var minimumDuration: Double
     private var maximumDistance: Double = 0
+    public var state: GestureValue<Bool> = .init(phase: .none, value: false)
     
     /// Creates a long-press gesture with a minimum duration
     /// - Parameter minimumDuration: The minimum duration of the long press that must elapse before the gesture succeeds.

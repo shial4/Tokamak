@@ -19,16 +19,7 @@ public struct AnyGesture<G: Gesture>: Gesture {
     public typealias Body = Self
     
     private var gesture: G
-    public var phase: GesturePhase {
-        get {
-            gesture.phase
-        }
-        set {
-            gesture.phase = newValue
-        }
-    }
-    
-    public var state: G.Value {
+    public var state: GestureValue<G.Value> {
         get {
             gesture.state
         }

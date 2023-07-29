@@ -19,8 +19,24 @@ public protocol Gesture {
     associatedtype Value
     associatedtype Body: Gesture where Body.Value == Value
 
-    var state: Value { get set }
-    var phase: GesturePhase { get set }
+    var state: GestureValue<Value> { get set }
+}
+
+extension Gesture {
+    var didRecognise: Bool {
+        print("🚀 default didRecognise")
+        return false
+    }
+    
+    public var phase: GesturePhase {
+        get {
+            state.phase
+        }
+        
+        set {
+            state.phase = newValue
+        }
+    }
 }
 
 // MARK: Performing the gesture

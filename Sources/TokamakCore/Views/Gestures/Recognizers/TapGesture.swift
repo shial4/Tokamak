@@ -26,24 +26,31 @@ public struct TapGesture: Gesture {
     private var delay: Double = 0.3
     private var touchTime = Date()
     
-    public var state: Int = 0
-    public var phase: GesturePhase = .none {
+    var didRecognise: Bool {
+        print("🚀 TapGesture didRecognise")
+        guard case .ended = state.phase, count == state.value else {
+            return false
+        }
+        return true
+    }
+    
+    public var state: GestureValue<Int> = .init(phase: .none, value: 0) {
         didSet {
-            print("🚀 phase", phase, oldValue)
+            print("🚀 phase", state.phase, oldValue)
             
-            if case .began = phase {
+            if case .began = state.phase {
                 touchTime = Date()
-            } else if case .ended = phase, case .began = oldValue {
+            } else if case .ended = state.phase, case .began = oldValue.phase {
                 let touch = Date()
                 let delayInSeconds = touch.timeIntervalSince(touchTime)
                 
                 if delayInSeconds > delay {
-                    state = 0
+                    state.value = 0
                 } else {
-                    state += 1
+                    state.value += 1
                 }
             } else {
-                state = 0
+                state.value = 0
             }
         }
     }

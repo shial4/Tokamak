@@ -20,19 +20,7 @@ public struct _EndedGesture<G>: Gesture where G: Gesture {
     
     public var gesture: G
     public let action: (G.Value) -> Void
-    public var phase: GesturePhase {
-        get {
-            gesture.phase
-        }
-        set {
-            gesture.phase = newValue
-            if case .ended = phase {
-                action(state)
-            }
-        }
-    }
-    
-    public var state: G.Value {
+    public var state: GestureValue<G.Value> {
         get {
             gesture.state
         }

@@ -12,25 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-//  Created by Szymon on 16/7/2023.
+//  Created by Szymon on 29/7/2023.
 //
 
-public struct GestureStateGesture<G, Value>: Gesture where G: Gesture {
-    public typealias Body = Self
-    
-    public var gesture: G
-    public var gestureState: GestureState<Value>
-    public var state: GestureValue<G.Value> {
-        get {
-            gesture.state
-        }
-        set {
-            gesture.state = newValue
-        }
-    }
-    
-    init(gesture: G, gestureState: GestureState<Value>) {
-        self.gesture = gesture
-        self.gestureState = gestureState
-    }
+import Foundation
+
+public struct GestureValue<Value> {
+    public var phase: GesturePhase
+    public var value: Value
 }
