@@ -163,8 +163,8 @@ struct LongPressGestureModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.gesture(
             LongPressGesture(minimumDuration: minimumDuration, maximumDistance: maximumDistance)
-                .updating($isPressing) { currentState, _, _ in
-                    onPressingChanged?(currentState.recognised)
+                .updating($isPressing) { _, _, _ in
+                    onPressingChanged?(isPressing)
                 }
                 .onEnded { _ in
                     action()
