@@ -20,23 +20,6 @@ import Foundation
 public struct DragGesture: Gesture {
     public typealias Body = Self
     
-    public struct Value: Equatable {
-        /// The location of the drag gesture’s first event.
-        public var startLocation: CGPoint = .zero
-        
-        /// The location of the drag gesture’s current event.
-        public var location: CGPoint = .zero
-        
-        /// A prediction, based on the current drag velocity, of where the final location will be if dragging stopped now.
-        public var predictedEndLocation: CGPoint = .zero
-        
-        /// The total translation from the start of the drag gesture to the current event of the drag gesture.
-        public var translation: CGSize = .zero
-        
-        /// A prediction, based on the current drag velocity, of what the final translation will be if dragging stopped now.
-        public var predictedEndTranslation: CGSize = .zero
-    }
-    
     public var endState: Value {
         gestureValue.value
     }
@@ -54,5 +37,24 @@ public struct DragGesture: Gesture {
     ///   - coordinateSpace: The coordinate space in which to receive location values.
     public init(minimumDistance: CGFloat) {
         self.minimumDistance = minimumDistance
+    }
+    
+    // MARK: Types
+    
+    public struct Value: Equatable {
+        /// The location of the drag gesture’s first event.
+        public var startLocation: CGPoint = .zero
+        
+        /// The location of the drag gesture’s current event.
+        public var location: CGPoint = .zero
+        
+        /// A prediction, based on the current drag velocity, of where the final location will be if dragging stopped now.
+        public var predictedEndLocation: CGPoint = .zero
+        
+        /// The total translation from the start of the drag gesture to the current event of the drag gesture.
+        public var translation: CGSize = .zero
+        
+        /// A prediction, based on the current drag velocity, of what the final translation will be if dragging stopped now.
+        public var predictedEndTranslation: CGSize = .zero
     }
 }

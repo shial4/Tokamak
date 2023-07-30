@@ -23,6 +23,7 @@ public struct LongPressGesture: Gesture {
     private var minimumDuration: Double
     private var maximumDistance: Double = 0
     private var isPressed = false
+    private var isRecognised = false
     private var touchStartTime = Date()
     
     private var minimumDurationInNanoseconds: UInt64 {
@@ -35,14 +36,14 @@ public struct LongPressGesture: Gesture {
     }
     
     public var state: Bool {
-        isPressed
+        isRecognised
     }
     
-    public var gestureValue: GestureValue<Bool> = .init(phase: .none, value: false) {
+    public var gestureValue: GestureValue<CGSize> = .init(phase: .none, value: .zero) {
         didSet {
             // Recognise touch down with in a view
             if case .began = gestureValue.phase {
-                gestureValue.value = false
+                isRecognised = false
                 isPressed = true
                 touchStartTime = Date()
                 print("✅", gestureValue.phase, gestureValue.value)
@@ -61,7 +62,7 @@ public struct LongPressGesture: Gesture {
             }
             
             if isPressed, case .changed = gestureValue.phase, minimumDuration < delayInSeconds  {
-                gestureValue.value = true
+                isRecognised = true
             }
             
             // If we ended touch and have desired count we complete gesture
@@ -138,7 +139,7 @@ extension View {
     public func onLongPressGesture(
         minimumDuration: Double = 0.5,
         maximumDistance: Double = 10.0,
-        pressing: ((LongPressGesture.Value) -> Void)? = nil,
+        pressing: ((Bool) -> Void)? = nil,
         perform action: @escaping () -> Void
     ) -> some View {
         self.modifier(
@@ -154,7 +155,7 @@ extension View {
 struct LongPressGestureModifier: ViewModifier {
     var minimumDuration: Double = 0.5
     var maximumDistance: Double = 10.0
-    var onPressingChanged: ((LongPressGesture.Value) -> Void)? = nil
+    var onPressingChanged: ((Bool) -> Void)? = nil
     let action: () -> Void
     
     @GestureState private var isPressing = false
@@ -162,9 +163,8 @@ struct LongPressGestureModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.gesture(
             LongPressGesture(minimumDuration: minimumDuration, maximumDistance: maximumDistance)
-                .updating($isPressing) { currentState, gestureState, _ in
-//                    gestureState = currentState
-                    onPressingChanged?(currentState)
+                .updating($isPressing) { currentState, _, _ in
+                    onPressingChanged?(currentState.recognised)
                 }
                 .onEnded { _ in
                     action()

@@ -16,7 +16,7 @@
 //
 
 public protocol Gesture {
-    associatedtype Value
+    associatedtype Value: Equatable
     associatedtype Ended
     associatedtype State
     associatedtype Body: Gesture where Body.Value == Value
